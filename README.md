@@ -4,14 +4,38 @@
 This repository was created as part of an assignment in [UBC's Master of Data Science](https://masterdatascience.ubc.ca/) program.
 
 ## Proposal
+
 #### Dataset
 This dataset is a modified version of [The California Housing Dataset](https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html), with [additional columns added by Aurélien Geron](https://github.com/ageron/handson-ml). This dataset contains information about median California house values (including related factors) as sourced from the 1990 US Census.
 
 The script to load the California Housing Dataset into python can be found here **(add link!!!)**
 
 #### Research Question
-**George**
+As discussed in a special report by The Economist on January 16, 2020 ['Housing is at the root of many of the rich world’s problems'](https://www.economist.com/special-report/2020/01/16/housing-is-at-the-root-of-many-of-the-rich-worlds-problems) and nowhere is this problem more acute than in the richest and most populous American state where Bloomberg has attempted to explain [How California Became America’s Housing Market Nightmare](https://www.bloomberg.com/graphics/2019-california-housing-crisis/).
 
+Although finding solutions for this deep-seated socioeconomic problem is beyond the scope of this research project, we propose to build a machine learning model using the dataset which will identify factors which can be used to predict housing prices to better inform stakeholders in this increasingly unaffordable market. Based on the latest report [(California Housing Affordability Update - Q3 - 2019)](https://www.car.org/marketdata/data/haitraditional) from the California Association of Realtors, only 31% of California residents can afford to purchase the median price home in their region.
+
+The main predictive research question we will attempt to answer is which machine learning model and model coefficients are the best predictors of median house prices in California (target) based on the 10 features (colulmns) from the data set shown below which contains 20,640 examples (rows). Our goal is to build a model with significantly higher accuracy than the 0.60 achieved by [Eric Chen](https://www.kaggle.com/ericfeng84), the author of [The California House Price](https://www.kaggle.com/ericfeng84/the-california-housing-price) Kaggle page from which the dataset was obtained.
+
+##### Location
+* longitude
+* latitude
+* ocean_proximity
+
+##### Home Characteristics
+* median age
+* total_rooms
+* total_bedrooms
+
+##### Demographics
+* median_income
+* population
+* households
+
+##### Target
+* median_house_value\n",
+  
+  
 #### How we will analyze the Data
 **Eithar**
 
@@ -25,7 +49,7 @@ The first set of figures produced shows each of the quantitative explanatory var
 From basic relationships, the next 2 items are used to look at multicollinearity. We produced the variance inflation factors (VIFs) of the quantitative explanatory variables, and many of them have significant multicollinearity. This can also be seen in the plot comparing rooms against bedrooms, and as expected, bedrooms has an extremely high VIF of 3. By both diagnosing multicollinearity and examining whether or not there are nested models, we may be able to expand on this analysis.
 
 #### Sharing Results
-**George**
+To share the results of our analysis, we plan to produce figures showing how model performance (i.e. model error) varies with choice of model and hyperparameter settings both for a general model covering data for the entire state of California, and where appropriate also for region specific models for which the optimized model weights are significantly different than those for the general model.
 
 ## Contributing Policy
 Please note that all contributions are subject to the [Code of Conduct](CODE_OF_CONDUCT.md).
