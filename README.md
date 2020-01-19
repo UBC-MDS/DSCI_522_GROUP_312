@@ -33,7 +33,7 @@ Our research will attempt to identify which machine learning model and model coe
 * households
 
 ##### Target
-* median_house_value\n",
+* median_house_value
   
   
 #### How we will analyze the Data
