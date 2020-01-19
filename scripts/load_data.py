@@ -8,7 +8,9 @@ import pandas as pd
 
 def main():
   # read in data
-  df = pd.read_csv('../data/src_data/housing.csv')
+  data = pd.read_csv('https://github.com/ageron/handson-ml/blob/master/datasets/housing/housing.csv?raw=true')
+  data.to_csv('loaded_raw_data.csv')
+
 
 if __name__ == "__main__":
     main()
