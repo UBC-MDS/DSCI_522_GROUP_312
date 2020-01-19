@@ -4,7 +4,7 @@
 """Downloads csv data from a URL and writes to a local filepath as a csv file 
 Usage: /scripts/load_data.py --url=<url> --out_file=<out_file>
 Options:
---url=<url>              URL from where to download the data (must be in standard csv format)
+--url=<url>              URL from where to download the data (must be in standard csv form)
 --out_file=<out_file>    Path (including filename) of where to locally write the file
 """
   
@@ -12,7 +12,6 @@ from docopt import docopt
 import requests
 import os
 import pandas as pd
-import feather
 
 opt = docopt(__doc__)
 
