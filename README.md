@@ -37,7 +37,9 @@ Our research will attempt to identify which machine learning model and model coe
   
   
 #### How we will analyze the Data
-We will use Linear Regression, K-Nearest Neighbour Trees, and other methods as we see fit to predict the median house value given the independent variables. Geron's analysis concluded that linear regression was the best estimator that he tested. We intend to expand on his testing by tuning hyperparameters and examining solutions that address the multicollinearity issue that is present in the data. 
+Since this dataset is publicly available on [Kaggle](https://www.kaggle.com/camnugent/california-housing-prices/kernels), there have been many analyses completed. The analysis that we focused on was [completed by Aurélien Geron](https://www.kaggle.com/artemiosgeromitsos/housing-super-duper-kernel/notebook). He concluded that a linear regressor was the most appropriate model. The focus of our analysis is to attempt to improve on his success by taking into consideration multicollinearity (relationships that exist between independent variables), tuning hyperparameters (hyperparameters will be chosen based on GridSearchCV, which uses the given estimator's default scoring method), and trying different models that were not included in his analysis.
+
+We will use Linear Regression, K-Nearest Neighbour Trees, Random Forests, and Support Vector Regressors to predict the median house value given the independent variables.
 
 #### Exploratory Data Analysis Figures and Tables to be Used
 The full Exploratory Data Analysis can be found [here](analysis/EDA.ipynb).
@@ -46,7 +48,7 @@ Before diving into the figures, it is key to understand that each record (row) o
 
 The first set of figures produced shows each of the quantitative explanatory variables plotted against the median house value. These 6 plots were chosen as an initial analysis because in Aurélien Geron's version of this analysis, he concluded that linear regression was the best estimation method. We chose to start by attempting to see which (if any) of the explanatory variables had patterns or variances compared to median house price.
 
-From basic relationships, the next 2 items are used to look at multicollinearity. We produced the variance inflation factors (VIFs) of the quantitative explanatory variables, and many of them have significant multicollinearity. This can also be seen in the plot comparing rooms against bedrooms, and as expected, bedrooms has an extremely high VIF of 34. By both diagnosing multicollinearity and examining whether or not there are nested models, we may be able to expand on this analysis.
+From basic relationships, the next 2 items are used to look at multicollinearity. We produced the variance inflation factors (VIFs) of the quantitative explanatory variables, and many of them have significant multicollinearity. This can also be seen in the plot comparing rooms against bedrooms, and as expected, bedrooms has an extremely high VIF of 34. We will continue to explore the role of multicollinearity in the models.
 
 The final item is a heatmap showing correlation between both independent and dependent variables. The variables with strong positive correlations are population, total rooms, and total bedrooms. Most other variables had positive correlation.
 
