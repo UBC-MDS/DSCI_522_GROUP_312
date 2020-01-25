@@ -27,7 +27,7 @@ opt <- docopt(doc)
 main <- function(filepath_in, filepath_out_train, filepath_out_test) {
   
   # load the data into this script
-  data <- readr::read_csv(filepath_in,)
+  data <- readr::read_csv(filepath_in, skip = 1)
   
   # Complete Wrangling
   data <- data %>%
