@@ -1,29 +1,16 @@
 # author: Group 312
 # date: 2020-1-23
 
-""" 
-This script creates three sets of exploratory data charts and one table 
-to help users better understand the dataset. The files are saved in png and
-csv formats respectively to the specified paths/filenames which are taken as
-arguments together with a path/filename to the data.
+""" Usage: 
+scripts/eda.py --train_path=<train_path> --chart1_path=<chart1_path> --chart2_path=<chart2_path> --chart3_path=<chart3_path> --table_path=<table_path>   
 
-Arguments
----------
-1. Path/filename pointing to the dataset 
-2. Path/filename indictating location and name of charts and table to 
-be saved (e.g. results/this_eda.png, results/this_eda.csv) as png or csv file
-
-Usage: eda.py --X_train_path=<X_train_path> --y_train_path=<y_train_path> 
---chart1_path<chart1_path> --chart2_path=<chart2_path> --chart3_path=<chart3_path> 
---table_path=<table_path>   
 
 Options:
---X_train_path=<X_train_path> Path (including filename) to find wrangled and split data
---y_train_path=<y_train_path> Path (including filename) to find wrangled and split data
---chart1_path<chart1_path> Path (including filename) to write first chart
+--train_path=<train_path> Path (including filename) to find wrangled and split data
+--chart1_path=<chart1_path> Path (including filename) to write first chart
 --chart2_path=<chart2_path> Path (including filename) to write second chart
 --chart3_path=<chart3_path> Path (including filename) to write third chart
---table_path=<table_path> Path (including filename) to write table
+--table_path_val=<table_path_val> Path (including filename) to write table
 """
 
 # Dependencies
@@ -31,23 +18,26 @@ import requests
 import os
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
 import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 import altair as alt
 import selenium
 from docopt import docopt
 
+
 opt = docopt(__doc__)
 
-def main(X_train_path, y_train_path, chart1_path, chart2_path, chart3_path, table_path):
+def main(train_path, chart1_path, chart2_path, chart3_path, table_path_val):
 
     # Allow Altair to make plots using more than 5000 rows
     alt.data_transformers.disable_max_rows()
 
     # Read data from file path
-    X_train = pd.read_csv(X_train_path)
-    y_train = pd.read_csv(y_train_path)
+    train = pd.read_csv(train_path)
+    columns = ['housing_median_age', 'total_rooms', 'total_bedrooms', 'population', 
+    'households', 'median_income', 'ocean_proximity', 'latitude', 'longitude']
+    X_train = train[columns]
+    y_train = train['median_house_value']
     
     # Scatterplots of various explanatory variables
     train_df = pd.concat([X_train, y_train], axis=1) 
@@ -113,13 +103,10 @@ def main(X_train_path, y_train_path, chart1_path, chart2_path, chart3_path, tabl
     vif = pd.DataFrame()
     vif['variable'] = mc_data.columns
     vif['vif_val'] = [variance_inflation_factor(mc_data.values, i) for i in range(mc_data.shape[1])]
-    vif.to_csv(table_path, index=False) 
+    vif.to_csv(table_path_val, index=False) 
 
     # Sources:
     # https://campus.datacamp.com/courses/generalized-linear-models-in-python/multivariable-logistic-regression?ex=4
 
-    return
-
 if __name__ == "__main__": 
-    main(X_train_path = opt["--X_train_path"], y_train_path = opt["--y_train_path"], chart1_path = opt["--chart1_path"], 
-    chart2_path = opt["--chart2_path"], chart3_path = opt["--chart3_path"], table_path = opt["--table_path"])
+    main(train_path = opt["--train_path"], chart1_path = opt["--chart1_path"], chart2_path = opt["--chart2_path"], chart3_path = opt["--chart3_path"], table_path_val = opt["--table_path_val"])
