@@ -37,10 +37,10 @@ def main(training_input_path, testing_input_path, output_path):
     train["ocean_proximity"] = le.fit_transform(train["ocean_proximity"])
     test["ocean_proximity"] = le.transform(test["ocean_proximity"])
 
-    X_train = train.drop(columns = "median_income")
-    y_train = train['median_income']
-    X_test = test.drop(columns = "median_income")
-    y_test = test['median_income']
+    X_train = train.drop(columns = "median_house_value")
+    y_train = train['median_house_value']
+    X_test = test.drop(columns = "median_house_value")
+    y_test = test['median_house_value']
 
     # Results table
     results = {'Model' : ["Random Forest With 10 features", "Random Forest With 5 Featutes", "SVR With 10 features", "SVR With 5 features"], 
