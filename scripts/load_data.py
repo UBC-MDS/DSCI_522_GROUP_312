@@ -3,12 +3,10 @@
 
 """
 Downloads data csv data from the web to a local filepath as either a csv or feather file format.
-
 Usage: load_data.py --url=<url> --file_path=<file_path> 
-
 Options:
---file_path=<file_path>  Path (including filename) to the csv file.
 --url=<file_path>  url from where to download the data
+--file_path=<file_path>  Path (including filename) to the csv file.
 """
 
 
