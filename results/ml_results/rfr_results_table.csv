@@ -1,0 +1,2 @@
+type,train_error,test_error
+Random Forest Regressor,0.026,0.175
