@@ -2,8 +2,8 @@
 # date: 2020-01-22
 
 "This script takes in a filepath to a CSV, performs relevant wrangling, 
-and then splits the CSV into training and testing data, and then saves
-training and testing data as CSVs to respective specified filepaths.
+and then splits the CSV into training and testing data (80% and 20% respectively), 
+and then saves training and testing data as CSVs to respective specified filepaths.
 
 Usage: scripts/wrangle-and-split-data.R --filepath_in=<filepath_in> --filepath_out_train=<filepath_out_train> --filepath_out_test=<filepath_out_test>
 
@@ -44,21 +44,35 @@ main <- function(filepath_in, filepath_out_train, filepath_out_test) {
   
   readr::write_csv(x = train, path = filepath_out_train)
   readr::write_csv(x = test, path = filepath_out_test)
-}
-
-test_files_created <- function() {
-  test_that("There was an issue creating the Training file. Please try again.", {
-    expect_equal(checkFileExists(x = filepath_out_train), TRUE)
-    })
   
-  test_that("There was an issue creating the Testing file. Please try again.", {
-    expect_equal(checkFileExists(x = filepath_out_test), TRUE)
-  })
+  test_files_created <- function() {
+    test_that("There was an issue creating the Training file. Please try again.", {
+      expect_equal(checkFileExists(x = filepath_out_train), TRUE)
+    })
+    test_that("There was an issue creating the Testing file. Please try again.", {
+      expect_equal(checkFileExists(x = filepath_out_test), TRUE)
+    })
+  }  
+  
+  test_files_created()
+    
 }
 
-test_files_created
+
+#   test_that("There was an issue creating the Training file. Please try again.", {
+#     expect(checkFileExists(x = train_filepath), TRUE)
+#   })
+#   
+#   test_that("There was an issue creating the Testing file. Please try again.", {
+#     expect_equal(checkFileExists(x = test_filepath), TRUE)
+#   })
+# }
+
+
 
 main(opt[["--filepath_in"]], opt[["--filepath_out_train"]], opt[["--filepath_out_test"]])
+
+
 
 # References
 # Balla, Deepanshu. n.d. SPLITTING Data into Training and Test Sets with R. https://www.listendata.com/2015/02/splitting-data-into-training-and-test.html.
