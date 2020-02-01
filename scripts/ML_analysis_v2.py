@@ -67,10 +67,10 @@ def main(training_input_path, testing_input_path, output_path):
     # Plotting LR performance
     data = pd.DataFrame(lr_response).melt(id_vars = 'n_features_to_select' ,value_vars= ['train_error', 'test_error'])
     plot = alt.Chart(data).mark_line().encode(
-    x = alt.X('n_features_to_select:Q'),
-    y = alt.Y('value:Q'),
-    color = 'variable:N'
-    )
+    x = alt.X('n_features_to_select:Q', title="Number of Features Selected"),
+    y = alt.Y('value:Q', title="Error"),
+    color = alt.Color('variable:N', title="Data Split")
+    ).properties(title="Recursive Feature Elimination Linear Regression Error")
     plot.save(output_path + 'LR_performace.png')
 
     # KNN WITH VARYING N_NEIGHBOR VALUES
@@ -88,10 +88,10 @@ def main(training_input_path, testing_input_path, output_path):
     # ploting KNN performance
     data = pd.DataFrame(knn_response).melt(id_vars = 'n_neighbours' ,value_vars= ['train_error', 'test_error'])
     plot = alt.Chart(data).mark_line().encode(
-    x = alt.X('n_neighbours:Q'),
-    y = alt.Y('value:Q'),
-    color = 'variable:N'
-    )
+    x = alt.X('n_neighbours:Q', title="Number of Nearest Neighbours"),
+    y = alt.Y('value:Q', title="Error"),
+    color = alt.Color('variable:N', title="Data Split")
+    ).properties(title="K-Nearest Neighbour Error when Varying K")
     plot.save(output_path + 'KNN_performace.png')
 
     # RANDOM FOREST REGRESSOR
