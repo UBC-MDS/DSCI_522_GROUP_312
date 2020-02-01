@@ -1,4 +1,4 @@
-all: model
+all: html_report
 
 load_file: scripts/load_data.py
 	python scripts/load_data.py --url="https://github.com/ageron/handson-ml/blob/master/datasets/housing/housing.csv?raw=true" --file_path="data/raw_data.csv"
@@ -11,8 +11,11 @@ EDA: wrangle scripts/eda_v2.py
 	
 model: wrangle scripts/ML_analysis_v2.py
 	python scripts/ML_analysis_v2.py --training_input_path='data/train.csv' --testing_input_path='data/test.csv' --output_path='results/ml_results'
-
+	
 report: EDA model results/california_housing_predict_report.ipynb 
+	jupyter nbconvert --to notebook --execute results/california_housing_predict_report.ipynb
+
+html_report: report EDA model results/california_housing_predict_report.ipynb 
 	jupyter nbconvert --to html --template basic results/california_housing_predict_report.ipynb
 
 clean : 
@@ -22,3 +25,4 @@ clean :
 	rm -f results/eda_charts/*.png 
 	rm -f results/eda_charts/*.csv 
 	rm -f results/figure/*.png
+	rm -f results/california_housing_predict_report.ipynb

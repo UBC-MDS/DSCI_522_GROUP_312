@@ -18,6 +18,29 @@ Machine Learning Results:
 
 The final report can be found [here](results/california_housing_predict_report.ipynb).
 
+## Dependencies
+
+> Python 3.7.3 and Python packages:
+* docopt==0.6.2
+* requests==2.22.0
+* pandas==0.24.2
+* scikit-learn==0.22.1
+* numpy==1.18.1
+* seaborn==0.9.0
+* statsmodels==0.11.0
+* selenium==3.141.0
+* altair==3.2.0
+
+> R version 3.6.1 and R packages:
+* knitr==1.26
+* tidyverse==1.2.1
+* readr==1.3.1
+* tidyr==1.0.2
+* caret==6.0-85
+* checkmate==1.9.4
+* testthat==2.3.1
+
+
 ## Proposal
 
 #### Dataset
