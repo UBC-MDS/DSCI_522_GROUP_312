@@ -124,5 +124,16 @@ def main(train_path, out_folder_path):
     # Sources:
     # https://campus.datacamp.com/courses/generalized-linear-models-in-python/multivariable-logistic-regression?ex=4
 
+
+    assert os.path.isfile(out_folder_path + 'correlation_heatmap.png')
+    assert os.path.isfile(out_folder_path + 'households_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'median-age_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'median-income_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'population_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'total-bedrooms_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'total-rooms_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'total-rooms_total-bedrooms.png')
+    assert os.path.isfile(out_folder_path + 'vif_table.csv')
+    
 if __name__ == "__main__": 
     main(train_path = opt["--train_path"], out_folder_path = opt["--out_folder_path"])
