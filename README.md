@@ -5,16 +5,16 @@ This repository was created as part of an assignment in [UBC's Master of Data Sc
 
 ## Usage
 Load the data:
-`python3 scripts/load_data.py --url="https://github.com/ageron/handson-ml/blob/master/datasets/housing/housing.csv?raw=true" --file_path="data/raw_data.csv"`
+`python scripts/load_data.py --url="https://github.com/ageron/handson-ml/blob/master/datasets/housing/housing.csv?raw=true" --file_path="data/raw_data.csv"`
 
 Complete Wrangling and Split into Training and Testing sets:
 `Rscript scripts/wrangle-and-split-data.R --filepath_in='data/raw_data.csv' --filepath_out_train='data/train.csv' --filepath_out_test='data/test.csv'`
 
 Download figures as part of an analysis completed:
-`python3 scripts/eda_v2.py --train_path='data/train.csv' --out_folder_path='results/eda_charts/'`
+`python scripts/eda_v2.py --train_path='data/train.csv' --out_folder_path='results/eda_charts/'`
 
 Machine Learning Results:
-`python3 scripts/ML_analysis_v2.py --training_input_path='data/train.csv' --testing_input_path='data/test.csv'  --output_path='results/ml_results'`
+`python scripts/ML_analysis_v2.py --training_input_path='data/train.csv' --testing_input_path='data/test.csv'  --output_path='results/ml_results/'`
 
 The final report can be found [here](results/california_housing_predict_report.ipynb).
 
