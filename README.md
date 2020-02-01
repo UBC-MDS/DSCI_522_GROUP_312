@@ -4,19 +4,13 @@
 This repository was created as part of an assignment in [UBC's Master of Data Science](https://masterdatascience.ubc.ca/) program.
 
 ## Usage
-Load the data:
-`python scripts/load_data.py --url="https://github.com/ageron/handson-ml/blob/master/datasets/housing/housing.csv?raw=true" --file_path="data/raw_data.csv"`
+To replicate this analysis and load all relevant packages, ensure that the dependencies below are installed, and clone this repo locally. Run the following command in terminal from the root of this project:
 
-Complete Wrangling and Split into Training and Testing sets:
-`Rscript scripts/wrangle-and-split-data.R --filepath_in='data/raw_data.csv' --filepath_out_train='data/train.csv' --filepath_out_test='data/test.csv'`
+`make all`
 
-Download figures as part of an analysis completed:
-`python scripts/eda_v2.py --train_path='data/train.csv' --out_folder_path='results/eda_charts/'`
+To reset the repository, run:
 
-Machine Learning Results:
-`python scripts/ML_analysis_v2.py --training_input_path='data/train.csv' --testing_input_path='data/test.csv'  --output_path='results/ml_results/'`
-
-The final report can be found [here](results/california_housing_predict_report.ipynb).
+`make clean`
 
 ## Dependencies
 
@@ -40,6 +34,7 @@ The final report can be found [here](results/california_housing_predict_report.i
 * checkmate==1.9.4
 * testthat==2.3.1
 
+> GNU make 4.2.1
 
 ## Proposal
 

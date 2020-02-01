@@ -86,12 +86,19 @@ def main(train_path, out_folder_path):
     ).save(out_folder_path + 'total-rooms_total-bedrooms.png')
     
     # Visualize the Correlation Matrix between variables
+    corrmatrix_titles = {"housing_median_age":"Median House Age", "total_rooms":"Total Rooms",
+                    "total_bedrooms":"Total Bedrooms", "population":"Population", "households":"Households",
+                    "median_income":"Median Income", "latitude":"Latitude", "longitude":"Longitude", "median_house_value":"Median House Value"}
     corrMatrix = train.corr()
-    corrMatrix['names'] = corrMatrix.columns
-    corrMatrix = corrMatrix.melt(id_vars = 'names',
-                value_vars = corrMatrix['names'])
+    corrMatrix = corrMatrix.rename(columns = corrmatrix_titles)
+    corrMatrix = corrMatrix.rename(index = corrmatrix_titles)
+    corrMatrix = corrMatrix.reset_index()
+
+    corrMatrix = corrMatrix.melt(id_vars = 'index',
+                    value_vars = corrMatrix['index'])
+    
     alt.Chart(corrMatrix).mark_rect().encode(
-        alt.X('names:O', title = None),
+        alt.X('index:O', title = None),
         alt.Y('variable:O', title = None),
         alt.Color('value:Q', title = 'Correlation Value')
     ).properties(
@@ -117,5 +124,16 @@ def main(train_path, out_folder_path):
     # Sources:
     # https://campus.datacamp.com/courses/generalized-linear-models-in-python/multivariable-logistic-regression?ex=4
 
+
+    assert os.path.isfile(out_folder_path + 'correlation_heatmap.png')
+    assert os.path.isfile(out_folder_path + 'households_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'median-age_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'median-income_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'population_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'total-bedrooms_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'total-rooms_scatterplot.png')
+    assert os.path.isfile(out_folder_path + 'total-rooms_total-bedrooms.png')
+    assert os.path.isfile(out_folder_path + 'vif_table.csv')
+    
 if __name__ == "__main__": 
     main(train_path = opt["--train_path"], out_folder_path = opt["--out_folder_path"])
