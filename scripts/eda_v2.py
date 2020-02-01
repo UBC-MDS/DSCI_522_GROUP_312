@@ -86,12 +86,19 @@ def main(train_path, out_folder_path):
     ).save(out_folder_path + 'total-rooms_total-bedrooms.png')
     
     # Visualize the Correlation Matrix between variables
+    corrmatrix_titles = {"housing_median_age":"Median House Age", "total_rooms":"Total Rooms",
+                    "total_bedrooms":"Total Bedrooms", "population":"Population", "households":"Households",
+                    "median_income":"Median Income", "latitude":"Latitude", "longitude":"Longitude", "median_house_value":"Median House Value"}
     corrMatrix = train.corr()
-    corrMatrix['names'] = corrMatrix.columns
-    corrMatrix = corrMatrix.melt(id_vars = 'names',
-                value_vars = corrMatrix['names'])
+    corrMatrix = corrMatrix.rename(columns = corrmatrix_titles)
+    corrMatrix = corrMatrix.rename(index = corrmatrix_titles)
+    corrMatrix = corrMatrix.reset_index()
+
+    corrMatrix = corrMatrix.melt(id_vars = 'index',
+                    value_vars = corrMatrix['index'])
+    
     alt.Chart(corrMatrix).mark_rect().encode(
-        alt.X('names:O', title = None),
+        alt.X('index:O', title = None),
         alt.Y('variable:O', title = None),
         alt.Color('value:Q', title = 'Correlation Value')
     ).properties(
