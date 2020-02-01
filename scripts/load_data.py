@@ -17,6 +17,7 @@ from docopt import docopt
 import requests
 import os
 import pandas as pd
+import os.path
 
 opt = docopt(__doc__)
 
@@ -24,6 +25,9 @@ def main(url, file_path):
   
   data = pd.read_csv(url, header = None)
   data.to_csv(file_path, index = False)
+
+  # tests
+  assert os.path.isfile(file_path)
   return
 
 if __name__ == "__main__":
