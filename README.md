@@ -5,25 +5,13 @@ This repository was created as part of an assignment in [UBC's Master of Data Sc
 
 ## Usage
 
-Makefile to run the complete analysis (note, the complete analysis takes up to 15 minutes): 
+To replicate this analysis and load all relevant packages, ensure that the dependencies below are installed, and clone this repo locally. Run the following command in terminal from the root of this project(note, the complete analysis takes up to 15 minutes):
 
 `make all`
 
+To reset the repository, run:
 
-
-Load the data:
-`python scripts/load_data.py --url="https://github.com/ageron/handson-ml/blob/master/datasets/housing/housing.csv?raw=true" --file_path="data/raw_data.csv"`
-
-Complete Wrangling and Split into Training and Testing sets:
-`Rscript scripts/wrangle-and-split-data.R --filepath_in='data/raw_data.csv' --filepath_out_train='data/train.csv' --filepath_out_test='data/test.csv'`
-
-Download figures as part of an analysis completed:
-`python scripts/eda_v2.py --train_path='data/train.csv' --out_folder_path='results/eda_charts/'`
-
-Machine Learning Results:
-`python scripts/ML_analysis_v2.py --training_input_path='data/train.csv' --testing_input_path='data/test.csv'  --output_path='results/ml_results/'`
-
-The final report can be found [here](results/california_housing_predict_report.ipynb).
+`make clean`
 
 ## Dependencies
 
@@ -47,7 +35,10 @@ The final report can be found [here](results/california_housing_predict_report.i
 * checkmate==1.9.4
 * testthat==2.3.1
 
+> GNU make 4.2.1
+
 ## Project Overview
+
 As discussed in a special report by The Economist on January 16, 2020 ['Housing is at the root of many of the rich world’s problems'](https://www.economist.com/special-report/2020/01/16/housing-is-at-the-root-of-many-of-the-rich-worlds-problems) and nowhere is this problem more acute than in the richest and most populous American state where Bloomberg has attempted to explain ['How California Became America’s Housing Market Nightmare'](https://www.bloomberg.com/graphics/2019-california-housing-crisis/).
 
 Although finding solutions for this deep-seated socioeconomic problem is beyond the scope of this research project, we propose to build a machine learning model using this dataset to identify factors which can be used to predict housing prices and help to better inform stakeholders in this increasingly unaffordable market. Based on the latest report [California Housing Affordability Update - Q3 - 2019](https://www.car.org/marketdata/data/haitraditional) from the California Association of Realtors, only 31% of California residents can afford to purchase the median price home in their region.
