@@ -9,13 +9,13 @@ wrangle: load_file scripts/wrangle-and-split-data.R
 EDA: wrangle scripts/eda_v2.py
 	python3 scripts/eda_v2.py --train_path='data/train.csv' --out_folder_path='results/eda_charts/' 
 	
-model: wrangle scripts/ML_analysis_v2.py
-	python scripts/ML_analysis_v2.py --training_input_path='data/train.csv' --testing_input_path='data/test.csv' --output_path='results/ml_results'
+model:  scripts/ML_analysis_v2.py
+	python scripts/ML_analysis_v2.py --training_input_path='data/train.csv' --testing_input_path='data/test.csv' --output_path='results/ml_results/'
 	
 report: EDA model results/california_housing_predict_report.ipynb 
 	jupyter nbconvert --to notebook --execute results/california_housing_predict_report.ipynb
 
-html_report: report EDA model results/california_housing_predict_report.ipynb 
+html_report: report results/california_housing_predict_report.ipynb 
 	jupyter nbconvert --to html --template basic results/california_housing_predict_report.ipynb
 
 clean : 
@@ -25,4 +25,5 @@ clean :
 	rm -f results/eda_charts/*.png 
 	rm -f results/eda_charts/*.csv 
 	rm -f results/figure/*.png
-	rm -f results/california_housing_predict_report.ipynb
+	rm -f results/ml_results/*.png
+	rm -f results/ml_results/*.csv
