@@ -103,23 +103,24 @@ def main(train_path, out_folder_path):
     upper_mask = np.triu(np.ones_like(corrMatrix, dtype=np.bool))
 
     # Create matplotlib figure
-    f, ax = plt.subplots(figsize=(12, 12))
+    corr_plot, ax = plt.subplots(figsize=(12, 12))
 
     # Create heatmap
     cmap = sns.diverging_palette(240, 10, as_cmap=True)
 
     # Overlay mask on heat map
     sns.heatmap(corrMatrix,
-            mask=mask,
+            mask=upper_mask,
             cmap=cmap,
             vmax=0.5,
             center=0,
             square=True, 
             linewidths=.8,
             cbar_kws={"shrink": 0.5})
+    plt.title('Correlation Matrix')
 
     # Save heatmap to file
-    corrMatrix.savefig(out_folder_path + 'correlation_heatmap.png')
+    corr_plot.savefig(out_folder_path + 'correlation_heatmap.png')
     
     
     # Create Variance Inflation Factor Table
