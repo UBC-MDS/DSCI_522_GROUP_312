@@ -91,16 +91,13 @@ def main(train_path, out_folder_path):
     
     
     # Visualize Correlation Matrix between variables
+    # Rename correlation matrix titles
     corrmatrix_titles = {"housing_median_age":"Median House Age", "total_rooms":"Total Rooms",
                     "total_bedrooms":"Total Bedrooms", "population":"Population", "households":"Households",
                     "median_income":"Median Income", "latitude":"Latitude", "longitude":"Longitude", "median_house_value":"Median House Value"}
     corrMatrix = train.corr()
     corrMatrix = corrMatrix.rename(columns = corrmatrix_titles)
     corrMatrix = corrMatrix.rename(index = corrmatrix_titles)
-    corrMatrix = corrMatrix.reset_index()
-
-    corrMatrix = corrMatrix.melt(id_vars = 'index',
-                    value_vars = corrMatrix['index'])
     
     # Create mask for upper triangle
     upper_mask = np.triu(np.ones_like(corrMatrix, dtype=np.bool))
