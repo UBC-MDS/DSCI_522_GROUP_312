@@ -64,8 +64,8 @@ def main(train_path, out_folder_path):
             alt.X(x, title=x_title),
             alt.Y('median_house_value:Q', title="Median House Value")
         ).properties(
-            width=200,
-            height=200,
+            width=300,
+            height=250,
             title="Median House Value per " + x_title
         )
         return chart
@@ -84,8 +84,8 @@ def main(train_path, out_folder_path):
         alt.X('total_bedrooms', title="Total Bedrooms"),
         alt.Y('total_rooms', title="Total Rooms")
     ).properties(
-        width=350,
-        height=300,
+        width=300,
+        height=250,
         title="Relationship between Bedroom and Room Counts"
     ).save(out_folder_path + 'total-rooms_total-bedrooms.png')
     
@@ -134,7 +134,7 @@ def main(train_path, out_folder_path):
     # Create and return dataframe with VIFs
     vif = pd.DataFrame()
     vif['variable'] = mc_data.columns
-    vif['vif_val'] = [variance_inflation_factor(mc_data.values, i) for i in range(mc_data.shape[1])]
+    vif['VIF'] = [variance_inflation_factor(mc_data.values, i) for i in range(mc_data.shape[1])]
     vif.to_csv(out_folder_path + 'vif_table.csv', index=False)
 
     # Sources:

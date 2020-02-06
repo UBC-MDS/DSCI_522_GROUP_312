@@ -84,7 +84,11 @@ def main(training_input_path, testing_input_path, output_path):
     x = alt.X('n_features_to_select:Q', title="Number of Features Selected"),
     y = alt.Y('value:Q', title="Error"),
     color = alt.Color('variable:N', title="Data Split")
-    ).properties(title="Recursive Feature Elimination Linear Regression Error")
+    ).properties(
+        title="Recursive Feature Elimination Linear Regression Error",
+        width=250,
+        height=200
+    )
     plot.save(output_path + 'LR_performace.png')
     
     
@@ -107,7 +111,11 @@ def main(training_input_path, testing_input_path, output_path):
     x = alt.X('n_features_to_select:Q', title="Number of Features Selected"),
     y = alt.Y('value:Q', title="Error"),
     color = alt.Color('variable:N', title="Data Split")
-    ).properties(title="Recursive Feature Elimination Linear Regression Error Excluding Latitude and Longitude")
+    ).properties(
+        title="Recursive Feature Elimination Linear Regression Error Excluding Latitude and Longitude",
+        width=250,
+        height=200
+    )
     plot.save(output_path + 'LR_performace_exc_feats.png')
     
     
@@ -130,7 +138,11 @@ def main(training_input_path, testing_input_path, output_path):
     x = alt.X('n_features_to_select:Q', title="Number of Features Selected"),
     y = alt.Y('value:Q', title="Error"),
     color = alt.Color('variable:N', title="Data Split")
-    ).properties(title="Recursive Feature Elimination Linear Regression Error Excluding Latitude, Longitude, and Total Bedrooms")
+    ).properties(
+        title="Recursive Feature Elimination Linear Regression Error Excluding Latitude, Longitude, and Total Bedrooms",
+        width=250,
+        height=200
+    )
     plot.save(output_path + 'LR_performace_exc_feats_2.png')
     
     
@@ -153,7 +165,11 @@ def main(training_input_path, testing_input_path, output_path):
     x = alt.X('n_neighbours:Q', title="Number of Nearest Neighbours"),
     y = alt.Y('value:Q', title="Error"),
     color = alt.Color('variable:N', title="Data Split")
-    ).properties(title="K-Nearest Neighbour Error when Varying K")
+    ).properties(
+        title="K-Nearest Neighbour Error when Varying K",
+        width=250,
+        height=200
+    )
     plot.save(output_path + 'KNN_performace.png')
     
     
@@ -176,7 +192,11 @@ def main(training_input_path, testing_input_path, output_path):
     x = alt.X('n_neighbours:Q', title="Number of Nearest Neighbours"),
     y = alt.Y('value:Q', title="Error"),
     color = alt.Color('variable:N', title="Data Split")
-    ).properties(title="K-Nearest Neighbour Error when Varying K and Excluding Latitude and Longitude")
+    ).properties(
+        title="K-Nearest Neighbour Error when Varying K and Excluding Latitude and Longitude",
+        width=250,
+        height=200
+    )
     plot.save(output_path + 'KNN_performace_exc_feats.png')
     
 
