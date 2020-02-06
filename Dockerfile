@@ -44,5 +44,8 @@ RUN conda install -y -c conda-forge altair && \
 # Install docopt Python package
 RUN /opt/conda/bin/conda install -y -c anaconda docopt
 
+# Install docopt R package
+RUN conda install -c conda-forge -y r-docopt
+
 # Put Anaconda Python in PATH
 ENV PATH="/opt/conda/bin:${PATH}"
