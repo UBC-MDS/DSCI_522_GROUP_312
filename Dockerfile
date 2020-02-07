@@ -16,7 +16,7 @@ RUN apt-get update && \
     apt-get install unzip
 
 # Install essential Linux components including GCC components and Make
-RUN sudo apt-get install build-essential
+RUN apt install build-essential -y --no-install-recommends
 
 # Install Chromedriver
 RUN wget -q "https://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriver_linux64.zip" -O /tmp/chromedriver.zip && \
