@@ -1,3 +1,7 @@
+# California Housing Dataset Pipe: Loading data, EDA, ML, and execution of Jupyter notebook
+# author: DSCI 522 Group 312
+# date: 2020/02/07
+
 all: html_report
 
 # loading data from URL
