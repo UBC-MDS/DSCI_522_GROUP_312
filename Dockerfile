@@ -15,6 +15,9 @@ RUN apt-get update && \
     apt-get install -y libnss3 && \
     apt-get install unzip
 
+# Install essential Linux components including GCC components and Make
+RUN sudo apt-get install build-essential
+
 # Install Chromedriver
 RUN wget -q "https://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriver_linux64.zip" -O /tmp/chromedriver.zip && \
     unzip /tmp/chromedriver.zip -d /usr/bin/ && \
