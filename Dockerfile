@@ -20,12 +20,6 @@ RUN wget -q "https://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriv
     unzip /tmp/chromedriver.zip -d /usr/bin/ && \
     rm /tmp/chromedriver.zip && chown root:root /usr/bin/chromedriver && chmod +x /usr/bin/chromedriver
 
-# Install Python machine learning tools
-RUN conda install scikit-learn && \
-    conda install pandas && \
-    conda install numpy && \
-    conda install -c anaconda statsmodels
-
 # Install R machine learning tools
 RUN conda install -c r r-tidyverse && \
     conda install -c r r-tidyr && \
@@ -45,7 +39,8 @@ RUN conda install -y -c conda-forge altair && \
 RUN /opt/conda/bin/conda install -y -c anaconda docopt
 
 # Install docopt R package
-RUN conda install -c conda-forge -y r-docopt
+RUN conda install -c conda-forge -y r-docopt==0.6.2 
+
 
 # Put Anaconda Python in PATH
 ENV PATH="/opt/conda/bin:${PATH}"
