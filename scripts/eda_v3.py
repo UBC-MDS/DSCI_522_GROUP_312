@@ -5,7 +5,7 @@
 Complete Exploratory Data Analysis on training portion of data and save figures and outputs
 
 Usage: 
-scripts/eda_v2.py --train_path=<train_path> --out_folder_path=<out_folder_path>
+scripts/eda_v3.py --train_path=<train_path> --out_folder_path=<out_folder_path>
 
 Options:
 --train_path=<train_path> Path (including filename) to find wrangled and split data
@@ -22,6 +22,10 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 import altair as alt
 import selenium
 from docopt import docopt
+
+from string import ascii_letters
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 opt = docopt(__doc__)
@@ -60,8 +64,8 @@ def main(train_path, out_folder_path):
             alt.X(x, title=x_title),
             alt.Y('median_house_value:Q', title="Median House Value")
         ).properties(
-            width=200,
-            height=200,
+            width=300,
+            height=250,
             title="Median House Value per " + x_title
         )
         return chart
@@ -80,32 +84,44 @@ def main(train_path, out_folder_path):
         alt.X('total_bedrooms', title="Total Bedrooms"),
         alt.Y('total_rooms', title="Total Rooms")
     ).properties(
-        width=350,
-        height=300,
+        width=300,
+        height=250,
         title="Relationship between Bedroom and Room Counts"
     ).save(out_folder_path + 'total-rooms_total-bedrooms.png')
     
-    # Visualize the Correlation Matrix between variables
+    
+    # Visualize Correlation Matrix between variables
+    # Rename correlation matrix titles
     corrmatrix_titles = {"housing_median_age":"Median House Age", "total_rooms":"Total Rooms",
                     "total_bedrooms":"Total Bedrooms", "population":"Population", "households":"Households",
                     "median_income":"Median Income", "latitude":"Latitude", "longitude":"Longitude", "median_house_value":"Median House Value"}
     corrMatrix = train.corr()
     corrMatrix = corrMatrix.rename(columns = corrmatrix_titles)
     corrMatrix = corrMatrix.rename(index = corrmatrix_titles)
-    corrMatrix = corrMatrix.reset_index()
-
-    corrMatrix = corrMatrix.melt(id_vars = 'index',
-                    value_vars = corrMatrix['index'])
     
-    alt.Chart(corrMatrix).mark_rect().encode(
-        alt.X('index:O', title = None),
-        alt.Y('variable:O', title = None),
-        alt.Color('value:Q', title = 'Correlation Value')
-    ).properties(
-        width = 400, 
-        height = 300, 
-        title = "Correlation Heatmap"
-    ).save(out_folder_path + 'correlation_heatmap.png')
+    # Create mask for upper triangle
+    upper_mask = np.triu(np.ones_like(corrMatrix, dtype=np.bool))
+
+    # Create matplotlib figure
+    corr_plot, ax = plt.subplots(figsize=(12, 12))
+
+    # Create heatmap
+    cmap = sns.diverging_palette(240, 10, as_cmap=True)
+
+    # Overlay mask on heat map
+    sns.heatmap(corrMatrix,
+            mask=upper_mask,
+            cmap=cmap,
+            vmax=0.5,
+            center=0,
+            square=True, 
+            linewidths=.8,
+            cbar_kws={"shrink": 0.5})
+    plt.title('Correlation Matrix')
+
+    # Save heatmap to file
+    corr_plot.savefig(out_folder_path + 'correlation_heatmap.png')
+    
     
     # Create Variance Inflation Factor Table
     # Drop `ocean_proximity`, `latitude` and `longitude` columns
@@ -118,7 +134,7 @@ def main(train_path, out_folder_path):
     # Create and return dataframe with VIFs
     vif = pd.DataFrame()
     vif['variable'] = mc_data.columns
-    vif['vif_val'] = [variance_inflation_factor(mc_data.values, i) for i in range(mc_data.shape[1])]
+    vif['VIF'] = [variance_inflation_factor(mc_data.values, i) for i in range(mc_data.shape[1])]
     vif.to_csv(out_folder_path + 'vif_table.csv', index=False)
 
     # Sources:
