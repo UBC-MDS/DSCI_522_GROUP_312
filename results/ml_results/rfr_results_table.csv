@@ -1,2 +1,0 @@
-type,train_error,test_error
-Random Forest Regressor,0.17,0.209
