@@ -14,7 +14,7 @@ wrangle: load_file scripts/wrangle-and-split-data.R
 	Rscript scripts/wrangle-and-split-data.R --filepath_in='data/raw_data.csv' --filepath_out_train='data/train.csv' --filepath_out_test='data/test.csv'
 
 # Make EDA plots and files (depends on wrangle-and-split-data script)
-EDA: wrangle scripts/eda_v2.py
+EDA: wrangle scripts/eda_v3.py
 	python scripts/eda_v3.py --train_path='data/train.csv' --out_folder_path='results/eda_charts/' 
 
 # Performs Machine learning analysis and saves the results as plots and tables	
