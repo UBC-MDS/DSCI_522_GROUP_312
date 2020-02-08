@@ -14,7 +14,25 @@ The written report can be found [here](results/california_housing_predict_report
 
 ## Usage
 
-To replicate this analysis and load all relevant packages, ensure that the dependencies below are installed, and clone this repo locally. Run the following command in terminal from the root of this project(note, the complete analysis takes up to 15 minutes):
+There are two recomended methods for running the relevant files for this analysis:
+
+### Using Docker
+
+To use Docker, you must [install Docker](https://docs.docker.com/install/).
+
+Clone this repository locally and navigate to the root of the directory at the command line.
+
+To create the analysis, run the following (note the complete analysis may take up to 15 minutes and to build the docker image it may take up to 30 minutes):
+
+`docker run --rm -v /$(pwd):/cali_housing gptzjs127/dsci_522_group_312 make -C cali_housing all`
+
+To reset the analysis, run the following:
+
+`docker run --rm -v /$(pwd):/cali_housing gptzjs127/dsci_522_group_312 make -C cali_housing clean`
+
+### Using Make
+
+To replicate this analysis and load all relevant packages, ensure that the dependencies below are installed, and clone this repository locally. Run the following command in terminal from the root of this project (note the complete analysis may take up to 15 minutes):
 
 `make all`
 
