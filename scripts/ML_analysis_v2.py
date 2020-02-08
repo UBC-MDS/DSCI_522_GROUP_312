@@ -157,6 +157,7 @@ def main(training_input_path, testing_input_path, output_path):
         knn.fit(X_train, y_train)
         knn_response['train_error'].append(round(1 - knn.score(X_train, y_train), 3))
         knn_response['test_error'].append(round(1 - knn.score(X_test, y_test), 3))
+        predictions = knn.predict(X_test)
     pd.DataFrame(knn_response).to_csv(output_path + 'knn_results_table.csv', index=False)
 
     # ploting KNN performance
@@ -172,7 +173,21 @@ def main(training_input_path, testing_input_path, output_path):
     )
     plot.save(output_path + 'KNN_performace.png')
     
-    
+    # plotting KNN performance compared to actual values
+    pred_estimates = pd.merge(pd.DataFrame(y_test), pd.DataFrame(predictions), left_index=True, right_index=True).rename(
+        columns={0:"prediction", "median_house_value":"actual"})
+    pred_estimates = pd.melt(pred_estimates, value_vars = ['actual', 'prediction'])
+    plot = alt.Chart(pred_estimates).mark_bar(opacity=0.3).encode(
+        alt.X('value:Q', bin=alt.Bin(maxbins=40), title="Median House Value"),
+        alt.Y('count()', stack=None, title="Count"),
+        alt.Color('variable', title="Value")
+    ).properties(
+        title="Histogram of Actual and Predicted Median House Values",
+        width=400,
+        height=200
+    )
+    plot.save(output_path + 'KNN_actual_vs_predicted.png')
+
     
     # KNN WITH VARYING N_NEIGHBOR VALUES WITH LATITUDE AND LONGITUDE EXCLUSION
     knn_response_exc = {'n_neighbours':[], 'train_error':[], 'test_error':[]}
@@ -184,6 +199,7 @@ def main(training_input_path, testing_input_path, output_path):
         knn_exc.fit(X_train_featexc, y_train)
         knn_response_exc['train_error'].append(round(1 - knn_exc.score(X_train_featexc, y_train), 3))
         knn_response_exc['test_error'].append(round(1 - knn_exc.score(X_test_featexc, y_test), 3))
+        predictions = knn_exc.predict(X_test_featexc)
     pd.DataFrame(knn_response_exc).to_csv(output_path + 'knn_results_table_exc_feats.csv', index=False)
 
     # ploting KNN performance
@@ -198,6 +214,21 @@ def main(training_input_path, testing_input_path, output_path):
         height=200
     )
     plot.save(output_path + 'KNN_performace_exc_feats.png')
+    
+    # plotting KNN performance compared to actual values excluding latitude and longitude
+    pred_estimates = pd.merge(pd.DataFrame(y_test), pd.DataFrame(predictions), left_index=True, right_index=True).rename(
+        columns={0:"prediction", "median_house_value":"actual"})
+    pred_estimates = pd.melt(pred_estimates, value_vars = ['actual', 'prediction'])
+    plot = alt.Chart(pred_estimates).mark_bar(opacity=0.3).encode(
+        alt.X('value:Q', bin=alt.Bin(maxbins=40), title="Median House Value"),
+        alt.Y('count()', stack=None, title="Count"),
+        alt.Color('variable', title="Value")
+    ).properties(
+        title="Histogram of Actual and Predicted Median House Values Excluding Latitude and Longitude",
+        width=400,
+        height=200
+    )
+    plot.save(output_path + 'KNN_actual_vs_predicted_exc_feats.png')
     
 
 
@@ -223,6 +254,9 @@ def main(training_input_path, testing_input_path, output_path):
     assert os.path.isfile(output_path + 'LR_performace_exc_feats.png')
     assert os.path.isfile(output_path + 'lr_rfe_results_table_exc_feats_2.csv')
     assert os.path.isfile(output_path + 'LR_performace_exc_feats_2.png')
+    assert os.path.isfile(output_path + 'KNN_actual_vs_predicted.png')
+    assert os.path.isfile(output_path + 'KNN_actual_vs_predicted_exc_feats.png')
+    
 
 
 if __name__ == "__main__":
