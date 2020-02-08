@@ -5,10 +5,6 @@
 # Use continuumio/anaconda3 as base image
 FROM continuumio/anaconda3 
 
-# Install R
-RUN apt-get update && \
-    apt-get install r-base r-base-dev -y
-
 # Install Chromium
 RUN apt-get update && \
     apt install -y chromium && \
@@ -20,7 +16,7 @@ RUN wget -q "https://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriv
     unzip /tmp/chromedriver.zip -d /usr/bin/ && \
     rm /tmp/chromedriver.zip && chown root:root /usr/bin/chromedriver && chmod +x /usr/bin/chromedriver
 
-# Install R machine learning tools
+# Install R and packages
 RUN conda install -c r r-tidyverse && \
     conda install -c r r-tidyr && \
     conda install -c anaconda requests&& \
@@ -36,11 +32,10 @@ RUN conda install -y -c conda-forge altair && \
     conda install -y vega_datasets && conda install -y selenium
 
 # Install docopt Python package
-RUN /opt/conda/bin/conda install -y -c anaconda docopt
+RUN conda install -c anaconda docopt==0.6.2
 
 # Install docopt R package
-RUN conda install -c conda-forge -y r-docopt==0.6.2 
-
+RUN conda install -y -c conda-forge r-docopt==0.6.1
 
 # Put Anaconda Python in PATH
 ENV PATH="/opt/conda/bin:${PATH}"

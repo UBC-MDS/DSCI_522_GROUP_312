@@ -149,11 +149,18 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A common approach to address multicollinearity is to remove variables with high VIFs. As is common in this case, the Linear Regression model performed best when all (or all but one) of the variables were included. The following illustrates the Recursive Feature Elimination for a Linear Regression Model. The x-axis represents the number of features selected so far.</p>
 <p>We additionally ran Recursive Feature Elimination on a Linear Regression model, excluding Latitude and Longitude, since these features are very specific to California. The results follow.</p>
-<p><img src="ml_results/LR_performace.png" width="50%" align="left"/> <img src="ml_results/LR_performace_exc_feats.png" width="50%" align="left"/></p>
 <p>It is clear that Linear Regression performed more favourably on the training and testing data including latitude and longitude. This is somewhat to be expected, as areas with expensive median house values often border other areas with similar socioeconomic groups.</p>
 <p>To attempt to address the multicollinearity, we also ran Recursive Feature Elimination excluding longitude, latitude, and total bedrooms, which was the feature that had the highest Variance Inflation Factor.</p>
 <p><img src="ml_results/LR_performace_exc_feats_2.png" alt="Image"></p>
 <p>As expected, the results are very similar to the model that only excluded latitude and longitude because the information from the feature "total_bedrooms" is effectively redundant.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="ml_results/LR_performace.png" width="3%" align="left"/> <img src="ml_results/LR_performace_exc_feats.png" width="50%" align="left"/></p>
 
 </div>
 </div>

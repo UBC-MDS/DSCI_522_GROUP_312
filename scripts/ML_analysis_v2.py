@@ -199,7 +199,7 @@ def main(training_input_path, testing_input_path, output_path):
         knn_exc.fit(X_train_featexc, y_train)
         knn_response_exc['train_error'].append(round(1 - knn_exc.score(X_train_featexc, y_train), 3))
         knn_response_exc['test_error'].append(round(1 - knn_exc.score(X_test_featexc, y_test), 3))
-        predictions = knn.predict(X_test_featexc)
+        predictions = knn_exc.predict(X_test_featexc)
     pd.DataFrame(knn_response_exc).to_csv(output_path + 'knn_results_table_exc_feats.csv', index=False)
 
     # ploting KNN performance
